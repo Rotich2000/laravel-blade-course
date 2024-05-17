@@ -1,20 +1,11 @@
 <x-layout>
     <div class="h-[calc(100vh-204px)]  flex justify-center items-center">
         <div class="w-full">
-            <h1 class="title">Register a new account</h1>
+            <h1 class="title">Reset your password</h1>
             <div class="card mx-auto max-w-screen-sm">
-                <form action={{ route('register') }} method="post" x-data="formSubmit" @submit.prevent="submit">
+                <form action="{{ route('password.update') }}" method="post">
                     @csrf
-                    {{-- Username --}}
-                    <div class="mb-4">
-                        <label for="username">Username</label>
-                        <input type="text" class="input @error('username') ring-red-500 @enderror" name="username"
-                            placeholder="Enter username..." value="{{ old('username') }}">
-                        @error('username')
-                            <p class="error">{{ $message }}</p>
-                        @enderror
-                    </div>
-
+                    <input type="hidden" name="token" value="{{ $token }}">
                     {{-- Email --}}
                     <div class="mb-4">
                         <label for="email">Email</label>
@@ -42,13 +33,8 @@
                             name="password_confirmation" placeholder="Confirm password">
                     </div>
 
-                    <div class="mb-4 flex gap-2 items-center">
-                        <input type="checkbox" name="subscribe" id="subscribe">
-                        <label for="subscribe">Subscribe to our newsletter</label>
-                    </div>
-
                     {{-- Submit button --}}
-                    <button x-ref="btn" class="primary-btn">Register</button>
+                    <button class="primary-btn">Reset Password</button>
                 </form>
             </div>
         </div>
